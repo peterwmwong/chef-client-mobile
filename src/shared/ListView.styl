@@ -1,0 +1,44 @@
+@import 'animation'
+@import 'transition'
+@import 'gradient'
+@import 'pos'
+
+.ListView
+  padding 0
+  margin 0
+  list-style none
+
+  > li
+    box-sizing border-box
+    border-top 1px solid #DEDEDE
+    -webkit-box-sizing border-box
+    color #2F3E46
+    font-weight bold
+    //gradient #FAFAFA #EEE
+    padding 12px 10px 10px 10px
+    position relative
+    text-decoration none
+    width 100%
+    vertical-align middle
+    z-index 1
+
+    > div
+      abspos 0px 0px 0px 0px
+      border-top 1px solid #155678
+      border-bottom 1px solid #155678
+      gradient #85BAE4 #5393C5
+      opacity 0.0
+      z-index -1
+
+    &.active
+      color #FFF
+      cursor pointer
+      outline none
+
+      > div
+        opacity 1.0
+
+    &.deactive
+      > div
+        animate fadeOut 1s
+        animation-timing-function ease-in

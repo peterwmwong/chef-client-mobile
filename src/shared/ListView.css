@@ -1,0 +1,6 @@
+.ListView{padding:0;margin:0;list-style:none;}
+.ListView > li{box-sizing:border-box;border-top:1px solid #dedede;-webkit-box-sizing:border-box;color:#2f3e46;font-weight:bold;padding:12px 10px 10px 10px;position:relative;text-decoration:none;width:100%;vertical-align:middle;z-index:1;}
+.ListView > li > div{position:absolute;top:0;right:0;bottom:0;left:0;border-top:1px solid #155678;border-bottom:1px solid #155678;background:#6da7d5;background:-moz-linear-gradient(top,#85bae4 0%,#5393c5 100%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#85bae4),color-stop(100%,#5393c5));filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#85bae4', endColorstr='#5393c5',GradientType=0 );opacity:0;z-index:-1}
+.ListView > li.active{color:#fff;cursor:pointer;outline:none;}
+.ListView > li.active > div{opacity:1}
+.ListView > li.deactive > div{-webkit-animation-name:fadeOut;-webkit-animation-duration:1s;-webkit-animation-fill-mode:forwards;-webkit-animation-timing-function:ease-in;-moz-animation-timing-function:ease-in}

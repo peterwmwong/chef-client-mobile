@@ -1,0 +1,5 @@
+.ANDROID .App{position:absolute;top:0;right:0;bottom:-70px;left:0;padding-bottom:69px}
+.IOS .App{position:absolute;top:0;right:0;bottom:-60px;left:0}
+.App{position:absolute;top:0;right:0;bottom:0;left:0;display:box;display:-webkit-box;display:-moz-box;-webkit-box-orient:vertical;-moz-box-orient:vertical;-webkit-tap-highlight-color:rgba(0,0,0,0.00);z-index:1;}
+.App > .TitleBar{position:absolute;top:0;right:0;left:0;z-index:3}
+.App > #content{margin-top:43px;position:relative;box-flex:1;-webkit-box-flex:1;-moz-box-flex:1;z-index:1}

@@ -1,0 +1,24 @@
+{
+  "author": "Peter Wong <peter.wm.wong@gmail.com>",
+  "contributors": [
+    "Grace Qiu"
+  ],
+  "name": "chef-client-mobile",
+  "version": "0.0.0",
+  "repository": {
+    "url": "https://github.com/peterwmwong/chef-client-mobile"
+  },
+  "engines": {
+    "node": ">=0.6.9"
+  },
+  "dependencies": {
+    "coffee-script": "~1.2.0",
+    "connect": "~1.8.5",
+    "iscroll": "~4.1.9",
+    "requirejs": "~1.0.5",
+    "stylus": "~0.22.6",
+    "sinon": "~1.3.1",
+    "qunit":"~0.2.9",
+    "uglify-js": "~1.2.5"
+  }
+}
