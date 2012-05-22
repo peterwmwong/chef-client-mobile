@@ -3,14 +3,12 @@
 #===================================================================
 npmbin = node_modules/.bin
 coffee = $(npmbin)/coffee
-serve= $(npmbin)/serve
 stylus = $(npmbin)/stylus
-uglifyjs = $(npmbin)/uglifyjs
 closure = vendor/closure-compiler/compiler.jar
 
 #-------------------------------------------------------------------
 # BUILD
-#------------------------------------------------------------------- 
+#-------------------------------------------------------------------
 requirejsBuild = node_modules/.bin/r.js
 
 
@@ -21,39 +19,33 @@ requirejsBuild = node_modules/.bin/r.js
 
 #-------------------------------------------------------------------
 # BUILD
-#------------------------------------------------------------------- 
-src/bootstrap.js: deps src/cell.js src/cell-builder-plugin.js
+#-------------------------------------------------------------------
+src/bootstrap.js: deps vendor/cell.js vendor/cell-builder-plugin.js
 	$(coffee) -c -b src/
+	$(stylus) --include ./src/styles --compress src/views/*.styl
 	$(requirejsBuild) \
 		-o \
 		paths.requireLib=../node_modules/requirejs/require \
+		paths.__=../vendor/__ \
+		paths.cell=../vendor/cell \
+		paths.cell-builder-plugin=../vendor/cell-builder-plugin \
 		include=requireLib \
-		name=cell!framework/App \
+		name=cell!views/App \
 		out=src/bootstrap-tmp.js \
 		optimize=none \
 		baseUrl=src includeRequire=true
-	cat node_modules/iscroll/src/iscroll-lite.js \
+	cat vendor/jquery.js \
+			vendor/iscroll-lite.js \
+			node_modules/underscore/underscore.js \
+			node_modules/backbone/backbone.js \
 			src/bootstrap-tmp.js > src/bootstrap-tmp.unmin.js
 	java -jar $(closure) --compilation_level SIMPLE_OPTIMIZATIONS --js src/bootstrap-tmp.unmin.js --js_output_file src/bootstrap.js
-	cat src/global.css \
-			src/bootstrap-tmp.css > src/bootstrap.css
+	mv src/bootstrap-tmp.css src/bootstrap.css
 	rm src/bootstrap-tmp.*
 
 #-------------------------------------------------------------------
-# DEV 
-#------------------------------------------------------------------- 
-dev-server: deps
-	$(npmbin)/coffee dev-server.coffee ./
-
-dev-stylus: deps
-	find ./src ./mixins -name '*.styl' -type f | xargs $(stylus) --include ./src/shared/styles --watch --compress
-
-dev-coffee: deps
-	find specs src spec-runner -name '*.coffee' -type f | xargs $(coffee) -c -b --watch
-
+# Dependencies
 #-------------------------------------------------------------------
-# Dependencies 
-#------------------------------------------------------------------- 
 remove-closure:
 	rm -rf vendor/closure-compiler
 
@@ -70,9 +62,9 @@ deps:
 
 #-------------------------------------------------------------------
 # TEST
-#------------------------------------------------------------------- 
+#-------------------------------------------------------------------
 specs: deps
-	find specs -name '*.spec.coffee' | xargs coffee -e 'console.log """define([],#{JSON.stringify process.argv[4..].map (e)->"spec!"+/^specs\/(.*?)\.spec\.coffee/.exec(e)[1]});"""' > spec-runner/GENERATED_all-specs.js
+	find specs -name '*.spec.coffee' | xargs $(coffee) -e 'console.log """define([],#{JSON.stringify process.argv[4..].map (e)->"spec!"+/^specs\/(.*?)\.spec\.coffee/.exec(e)[1]});"""' > spec-runner/GENERATED_all-specs.js
 
-clean: 
+clean:
 	@@rm src/bootstrap.*

@@ -7,30 +7,30 @@ define
 
       describe name, ->
         specRequire = null
-        ctx = null
-
-        beforeEach ->
-          # Create a new require context for each spec describe/it
-          specRequire = require.config
-            context: ctxName = "specs#{ctxPostfix++}"
-            baseUrl: '/src/'
-          ctx = window.require.s.contexts[ctxName]
-
-        afterEach ->
-          # Remove all modules loaded from context
-          $("[data-requirecontext='#{ctx.contextName}']").remove()
+        ctx = undefined
 
         # Run Spec
         Spec do->
 
-          mockModules: (map)->
-            for k,v of map
-              ctx.defined[k] = v
-              ctx.specified[k] = ctx.loaded[k] = true
+          loadModule: (cb_mocks,cb)->
+            # Remove all modules loaded from context
+            $("[data-requirecontext='#{ctx.contextName}']").remove() if ctx
 
-          loadModule: (cb)->
+            # Create a new require context for each spec describe/it
+            specRequire = require.config
+              context: ctxName = "specs#{ctxPostfix++}"
+              baseUrl: '/src/'
+            ctx = window.require.s.contexts[ctxName]
+            
+            if typeof cb is 'function' and cb_mocks
+              for k,v of cb_mocks
+                ctx.defined[k] = v
+                ctx.specified[k] = ctx.loaded[k] = true
+
+            cb = cb_mocks if typeof cb_mocks is 'function'
+
             module = undefined
             runs -> specRequire [name], (mod)-> module = mod
             waitsFor (-> module isnt undefined), "'#{name}' Module to load", 1000
-            runs -> cb module
+            runs -> cb module, specRequire
             

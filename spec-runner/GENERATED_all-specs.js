@@ -1,1 +1,1 @@
-define([],["spec!framework/ContextModel","spec!framework/Model","spec!framework/Nav"]);
+define([],["spec!mock-resource-loader/mock-resource-loader","spec!Nav"]);

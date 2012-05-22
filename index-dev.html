@@ -5,14 +5,31 @@
 <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<link href='src/global.css' rel='stylesheet'></link>
-<script src="vendor/jquery.js"></script>
-<script src="node_modules/iscroll/src/iscroll-lite.js"></script>
-<script src='node_modules/requirejs/require.js'></script>
-<script src='src/cell.js'></script>
 </head>
-<body style='margin:0;padding:0;'
-	  data-cell='framework/App'
-	  data-cell-baseurl='src'></body>
-<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+<body style='margin:0;padding:0;' data-cell='views/App'>
+  <script src="vendor/jquery.js"></script>
+  <script>
+    require = {
+      baseUrl:'src',
+      paths: {
+        cell: '../vendor/cell',
+        __: '../vendor/__'
+      }
+    };
+  </script>
+  <script src='node_modules/requirejs/require.js' data-main='cell'></script>
+  <script src='node_modules/underscore/underscore.js'></script>
+  <script src='node_modules/backbone/backbone.js'></script>
+  <script src='vendor/iscroll-lite.js'></script>
+  <script>
+  if(window.location.search.indexOf('mock-data') > -1){
+    Backbone.sync = function(method, model, opts){
+      require(['mock-resource-loader/mock-resource-loader'], function(mdl){
+        (Backbone.sync = mdl.getSync())(method,model,opts);
+      });
+    };
+  }
+  </script>
+  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+</body>
 </html>

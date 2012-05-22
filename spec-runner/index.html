@@ -1,26 +1,28 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>chef-client-mobile spec runner</title>
-
+  <title>Spec Runner</title>
   <link rel="shortcut icon" type="image/png" href="/vendor/jasmine/jasmine_favicon.png">
   <link rel="stylesheet" type="text/css" href="/vendor/jasmine/jasmine.css">
+  <link rel="stylesheet" type="text/css" href="./jasmine-override.css">
   <script src="/vendor/jquery.js"></script>
   <script src="/vendor/jasmine/jasmine.js"></script>
   <script src="/vendor/jasmine/jasmine-html.js"></script>
+  <script src="/vendor/sinon.js"></script>
+  <script src="/node_modules/underscore/underscore.js"></script>
+  <script src="/node_modules/backbone/backbone.js"></script>
   <script src="/node_modules/requirejs/require.js"></script>
   <script>
-    (function(){
-      require.config({
-        context: 'specRunner',
-        baseUrl: '/specs/',
-        paths: {
-          'SpecHelpers': '../spec-runner/SpecHelpers',
-          'spec': '../spec-runner/spec'
-        }
-      })(['../spec-runner/SpecRunner']);
-    })()
+    require.config({
+      context: 'specRunner',
+      baseUrl: '/specs/',
+      paths: {
+        'SpecHelpers': '../spec-runner/SpecHelpers',
+        'spec': '../spec-runner/spec'
+      }
+    })(['../spec-runner/SpecRunner']);
   </script>
+  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </head>
 <body></body>
 </html>

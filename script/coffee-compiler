@@ -1,0 +1,3 @@
+#!/bin/bash
+npm install
+find src/ specs/ spec-runner/ -name '*.coffee' -type f | xargs node_modules/.bin/coffee -c -b --watch

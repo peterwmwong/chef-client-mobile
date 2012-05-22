@@ -6,9 +6,18 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 <link href='src/bootstrap.css' rel='stylesheet'></link>
-<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-<script src='src/bootstrap.js'></script>
+<script>
+if(window.location.search.indexOf('mock-data') > -1){
+  Backbone.sync = function(method, model, opts){
+    require(['mock-resource-loader/mock-resource-loader'], function(mdl){
+      (Backbone.sync = mdl.getSync())(method,model,opts);
+    });
+  };
+}
+</script>
 </head>
-<body style='margin:0;padding:0;' data-cell='framework/App' data-cell-baseurl='src' data-cell-cachebust='true'>
+<body style='margin:0;padding:0;' data-cell='views/App'>
+  <script>require={baseUrl:'src'}</script>
+  <script src='src/bootstrap.js'></script>
 </body>
 </html>
