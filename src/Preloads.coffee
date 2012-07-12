@@ -1,0 +1,1 @@
+define ['cell!views/pages/RecipesPage'], ->

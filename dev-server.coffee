@@ -1,14 +1,13 @@
 resolve = require('path').resolve
-server = (connect = require 'connect')()
+connect = require 'connect'
+http = require 'http'
 
 if process.argv.length != 3 then console.log "[dir]"
 else
   path = resolve process.argv[2]
-
-  server.use use for use in [
-    connect.favicon()
-    connect.static path, maxAge: 1, hidden: true
-  ]
-
-  server.listen 3000, ->
-  	console.log "'serving #{path} on #{server.address().port}"
+  app = connect()
+    .use(connect.favicon())
+    .use(connect.compress())
+    .use(connect.static path, maxAge: 1, hidden: true)
+  http.createServer(app).listen(3000)
+  

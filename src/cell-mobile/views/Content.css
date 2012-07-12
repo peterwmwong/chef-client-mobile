@@ -1,0 +1,6 @@
+.Content{position:relative;background-color:#fff;}
+.Content > .tab{position:absolute;top:0;right:0;bottom:0;left:0;-webkit-transform:translateZ(0);display:none;}
+.Content > .tab.active{display:block;}
+.Content > .tab.active > .PageContainer.active{display:block}
+.Content > .tab > .PageContainer{position:absolute;top:0;right:0;bottom:0;left:0;overflow:hidden;display:none;}
+.Content > .tab > .PageContainer.page-slide-out,.Content > .tab > .PageContainer.page-slide-out-reverse{display:block}

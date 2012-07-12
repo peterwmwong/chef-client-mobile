@@ -1,8 +1,0 @@
-.ANDROID .App{position:absolute;top:0;right:0;bottom:-70px;left:0;padding-bottom:69px}
-.IOS .App{position:absolute;top:0;right:0;bottom:-60px;left:0}
-.App{position:absolute;top:0;right:0;bottom:0;left:0;background-color:#000;display:box;display:-webkit-box;display:-moz-box;-webkit-box-orient:vertical;-moz-box-orient:vertical;font-family:Helvetica,Arial,sans-serif;-webkit-tap-highlight-color:rgba(0,0,0,0.00);z-index:1;}
-.App > .TitleBar{z-index:2}
-.App > .TabBar{z-index:2}
-.App > .Content{box-flex:1;-webkit-box-flex:1;-moz-box-flex:1;z-index:1}
-body{background-color:#222;overflow:hidden}
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline}

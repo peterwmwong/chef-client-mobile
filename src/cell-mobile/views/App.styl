@@ -1,0 +1,149 @@
+@import 'animation'
+@import 'box'
+@import 'pos'
+
+body.ANDROID > .App
+  bottom -70px
+  padding-bottom 69px
+
+body.IOS > .App
+  top 1px
+  bottom -61px
+
+.App
+  abspos 0px 0px 0px 0px
+  background-color #000
+  box vertical
+  font-family Helvetica, Arial, sans-serif
+  -webkit-tap-highlight-color rgba(0,0,0,0)
+  z-index 1
+
+  > .DEBUG
+    color #FFF
+
+  > .TitleBar
+    z-index 2
+
+  > .TabBar
+    z-index 2
+
+  > .Content
+    box-flex 1
+    z-index 1
+
+slide-amt=30%
+@-webkit-keyframes slideOutLeft
+  from
+    -webkit-transform translateX(0)
+  to
+    -webkit-transform translateX(-1 * slide-amt)
+
+@-webkit-keyframes slideInLeft
+  from
+    -webkit-transform translateX(slide-amt)
+  to
+    -webkit-transform translateX(0)
+
+@-webkit-keyframes slideOutLeft-reverse
+  from
+    -webkit-transform translateX(0)
+  to
+    -webkit-transform translateX(slide-amt)
+
+@-webkit-keyframes slideInLeft-reverse
+  from
+    -webkit-transform translateX(-1 * slide-amt)
+  to
+    -webkit-transform translateX(0)
+
+page-slide-amt=100%
+@-webkit-keyframes pageSlideOutLeft
+  from
+    -webkit-transform translateX(0)
+  to
+    -webkit-transform translateX(-1 * page-slide-amt)
+
+@-webkit-keyframes pageSlideInLeft
+  from
+    -webkit-transform translateX(page-slide-amt)
+  to
+    -webkit-transform translateX(0)
+
+@-webkit-keyframes pageSlideOutLeft-reverse
+  from
+    -webkit-transform translateX(0)
+  to
+    -webkit-transform translateX(page-slide-amt)
+
+@-webkit-keyframes pageSlideInLeft-reverse
+  from
+    -webkit-transform translateX(-1 * page-slide-amt)
+  to
+    -webkit-transform translateX(0)
+
+@-webkit-keyframes fadeIn
+  from
+    opacity 0
+  to
+    opacity 1.0
+
+@-webkit-keyframes fadeOut
+  from
+    opacity 1.0
+  to
+    opacity 0
+
+.slide-out-fade
+.slide-in-fade
+.page-slide-out
+.page-slide-in
+.slide-out-fade-reverse
+.slide-in-fade-reverse
+.page-slide-out-reverse
+.page-slide-in-reverse
+  animation-duration 500ms
+  animation-fill-mode forwards
+
+.slide-out-fade
+  animation-name @css{slideOutLeft,fadeOut}
+
+.slide-in-fade
+  animation-name @css{slideInLeft,fadeIn}
+
+.slide-out-fade-reverse
+  animation-name @css{slideOutLeft-reverse,fadeOut}
+
+.slide-in-fade-reverse
+  animation-name @css{slideInLeft-reverse,fadeIn}
+
+.page-slide-out
+  animation-name pageSlideOutLeft
+
+.page-slide-in
+  animation-name pageSlideInLeft
+
+.page-slide-out-reverse
+  animation-name pageSlideOutLeft-reverse
+
+.page-slide-in-reverse
+  animation-name pageSlideInLeft-reverse
+
+
+// RESET script
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td
+  margin 0
+  padding 0
+  border 0
+  outline 0
+  font-weight inherit
+  font-style inherit
+  font-size 100%
+  font-family inherit
+  vertical-align baseline

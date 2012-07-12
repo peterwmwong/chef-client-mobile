@@ -1,0 +1,6 @@
+.TitleBar{-moz-border-radius-topleft:3px;-moz-border-radius-topright:3px;-moz-border-radius-bottomright:0;-moz-border-radius-bottomleft:0;border-top-left-radius:3px;border-top-right-radius:3px;border-bottom-right-radius:0;border-bottom-left-radius:0;-webkit-box-shadow:0 0 5px #222;-moz-box-shadow:0 0 5px #222;box-shadow:0 0 5px #222;border-top:1px solid #666;border-bottom:1px solid #000;background:#333;background:-moz-linear-gradient(top,#444 0%,#222 100%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#444),color-stop(100%,#222));filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#444', endColorstr='#222',GradientType=0 );height:40px;position:relative;}
+.TitleBar > .tab{position:absolute;top:0;right:0;bottom:0;left:0;display:none;}
+.TitleBar > .tab.active{display:block;}
+.TitleBar > .tab.active > .PageTitleBar.slide-out-fade,.TitleBar > .tab.active > .PageTitleBar.slide-out-fade-reverse{display:block}
+.TitleBar > .tab.active > .PageTitleBar.active{display:block}
+.TitleBar > .tab > .PageTitleBar{display:none}

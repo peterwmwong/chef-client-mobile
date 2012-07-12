@@ -21,7 +21,7 @@ body
   margin 0
   padding 0
 
-.banner
+#TrivialReporter > .banner
   fixpos 0px 0px false 0px
   color_bg_banner = #555
   gradient color_bg_banner #333
@@ -40,7 +40,7 @@ body
       color color_link
       font-weight bold
       text-shadow 0 -1px 0 #222
-      content "Specs"
+      content "Chef Specs"
       position absolute
       width 250px
       top 0px
@@ -53,6 +53,7 @@ body
     text-align left
     font-size 0px
     padding 3px 0 0 5px
+    width 200px
 
     > *
       color color_link
@@ -60,7 +61,7 @@ body
       font-weight bold
       text-shadow 0 -1px 0 #222
 
-.runner
+#TrivialReporter > .runner
   border none
   margin 30px 0 0 0
   padding 8px 10px 5px 10px
@@ -91,8 +92,10 @@ body
 
 
 
-.jasmine_reporter
+#TrivialReporter
   margin 0
+  padding 0
+  background-color darken(color_bg,50%)
 
   a:visited, a
     text-decoration none
@@ -110,84 +113,84 @@ body
     > a:visited, a
       color color_link_skipped
 
-
-.suite
-  border none
-  padding 15px 0 0 12px
-  margin 0
-  font-size 22px
-  background-color color_running
-
-  &:first-of-type
-    padding 5px 0 0 12px
-    &.passed, &.failed
-      border-top none
-
-  &.passed
-    background-color color_pass
-    > a
-      color color_link_pass
-
-  &.failed
-    background-color color_fail
-    > a
-      color color_link_fail
-
-  &.skipped
-    background-color color_skipped
-
-  .run_spec
-    margin-right 10px
-    
+#TrivialReporter
   .suite
-    margin 5px 0 15px 0
+    border none
+    padding 15px 0 0 12px
+    margin 0
+    font-size 22px
+    background-color color_running
+
+    &:first-of-type
+      padding 5px 0 0 12px
+      &.passed, &.failed
+        border-top none
+
+    &.passed
+      background-color color_pass
+      > a
+        color color_link_pass
+
+    &.failed
+      background-color color_fail
+      > a
+        color color_link_fail
+
+    &.skipped
+      background-color color_skipped
+
+    .run_spec
+      margin-right 10px
+      
+    .suite
+      margin 5px 0 15px 0
 
 
-.spec
-  margin 0 0 0 15px
-  padding 5px 0 0 10px
-  font-size 16px
-  font-weight normal
-  position relative
+  .spec
+    margin 0 0 0 15px
+    padding 5px 0 0 10px
+    font-size 16px
+    font-weight normal
+    position relative
 
-  &:last-child
+    &:last-child
+      &.failed, &.passed, &.skipped
+        border none
+
     &.failed, &.passed, &.skipped
       border none
 
-  &.failed, &.passed, &.skipped
-    border none
+    &.passed
+      background-color color_pass
+      > a
+        color color_link_pass
 
-  &.passed
-    background-color color_pass
-    > a
-      color color_link_pass
+    &.failed
+      background-color color_fail
+      > a
+        color color_link_fail
 
-  &.failed
-    background-color color_fail
-    > a
-      color color_link_fail
+    &.skipped
+      background-color color_skipped
 
-  &.skipped
-    background-color color_skipped
+  .messages
+    border-left none
+    margin 0 0 0 2px
+    padding 0 10px 0 0px
+    color #CBB
 
-.messages
-  border-left none
-  margin 0 0 0 2px
-  padding 0 10px 0 0px
-  color #CBB
+    border-left 5px solid rgba(color_link_fail,.1)
 
-  border-left 5px solid rgba(color_link_fail,.1)
+    > .resultMessage
+      background-color darken(color_fail,50%)
+      padding 10px 0 0 10px
+      margin-top 5px
 
-  > .resultMessage
-    background-color darken(color_fail,50%)
-    padding 10px 0 0 10px
-    margin-top 5px
+      &:first-child
+        margin-top 3px
 
-    &:first-child
-      margin-top 3px
-
-  > .stackTrace
-    background-color darken(color_fail,50%)
-    border none
-    margin 0
-    padding 3px 0 0 10px
+    > .stackTrace
+      background-color darken(color_fail,50%)
+      border none
+      margin 0
+      padding 3px 0 0 10px

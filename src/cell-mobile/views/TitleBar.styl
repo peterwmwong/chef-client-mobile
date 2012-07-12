@@ -1,0 +1,32 @@
+@import 'box'
+@import 'border'
+@import 'gradient'
+@import 'pos'
+@import 'triangle'
+
+.TitleBar
+  border-radius 3px 3px 0 0
+  box-shadow 0px 0px 5px #222
+  border-top 1px solid #666
+  border-bottom 1px solid #000
+  gradient #444 #222
+  height 40px
+  position relative
+
+  > .tab
+    abspos 0px 0px 0px 0px
+    display none    
+
+    &.active
+      display block
+
+      > .PageTitleBar
+        &.slide-out-fade
+        &.slide-out-fade-reverse
+          display block
+
+        &.active
+          display block
+
+    > .PageTitleBar
+      display none

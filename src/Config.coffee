@@ -1,2 +1,2 @@
-define
+define ->
   default_tab: 'recipes'

@@ -1,0 +1,27 @@
+@import 'pos'
+
+.Content
+  position relative
+  background-color #FFF
+
+  > .tab
+    abspos 0px 0px 0px 0px
+    -webkit-transform translateZ(0)
+    display none
+
+    &.active
+      display block
+
+      > .PageContainer
+        &.active
+          display block
+
+
+    > .PageContainer
+      abspos 0px 0px 0px 0px
+      overflow hidden
+      display none
+      
+      &.page-slide-out
+      &.page-slide-out-reverse
+        display block

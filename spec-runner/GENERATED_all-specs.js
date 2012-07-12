@@ -1,1 +1,1 @@
-define([],["spec!mock-resource-loader/mock-resource-loader","spec!Nav"]);
+define([],["spec!cell-mobile/Nav","spec!cell-mobile/views/PageViewModel","spec!mock-resource-loader/mock-resource-loader"]);

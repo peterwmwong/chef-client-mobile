@@ -22,7 +22,7 @@ requirejsBuild = node_modules/.bin/r.js
 #-------------------------------------------------------------------
 src/bootstrap.js: deps vendor/cell.js vendor/cell-builder-plugin.js
 	$(coffee) -c -b src/
-	$(stylus) --include ./src/styles --compress src/views/*.styl
+	find src/views src/cell-mobile -name '*.styl' -type f | xargs node_modules/.bin/stylus --include ./src/styles --compress
 	$(requirejsBuild) \
 		-o \
 		paths.requireLib=../node_modules/requirejs/require \
@@ -30,15 +30,16 @@ src/bootstrap.js: deps vendor/cell.js vendor/cell-builder-plugin.js
 		paths.cell=../vendor/cell \
 		paths.cell-builder-plugin=../vendor/cell-builder-plugin \
 		include=requireLib \
-		name=cell!views/App \
+		name=cell!cell-mobile/views/App \
 		out=src/bootstrap-tmp.js \
 		optimize=none \
 		baseUrl=src includeRequire=true
-	cat vendor/jquery.js \
-			vendor/iscroll-lite.js \
+	cat vendor/zepto.js > src/bootstrap-tmp.unmin.js
+	echo ";" >> src/bootstrap-tmp.unmin.js
+	cat vendor/iscroll-lite.js \
 			node_modules/underscore/underscore.js \
 			node_modules/backbone/backbone.js \
-			src/bootstrap-tmp.js > src/bootstrap-tmp.unmin.js
+			src/bootstrap-tmp.js >> src/bootstrap-tmp.unmin.js
 	java -jar $(closure) --compilation_level SIMPLE_OPTIMIZATIONS --js src/bootstrap-tmp.unmin.js --js_output_file src/bootstrap.js
 	mv src/bootstrap-tmp.css src/bootstrap.css
 	rm src/bootstrap-tmp.*

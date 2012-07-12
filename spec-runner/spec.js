@@ -2,51 +2,64 @@
 
 define({
   load: function(name, req, load, config) {
+    var isFunc;
+    isFunc = function(obj) {
+      return Object.prototype.toString.call(obj) === '[object Function]';
+    };
     return req(["" + name + ".spec"], function(Spec) {
       return load(function() {
         var ctxPostfix;
         ctxPostfix = 0;
         return describe(name, function() {
-          var ctx, specRequire;
-          specRequire = null;
-          ctx = void 0;
-          return Spec((function() {
-            return {
-              loadModule: function(cb_mocks, cb) {
-                var ctxName, k, module, v;
-                if (ctx) {
-                  $("[data-requirecontext='" + ctx.contextName + "']").remove();
-                }
-                specRequire = require.config({
-                  context: ctxName = "specs" + (ctxPostfix++),
-                  baseUrl: '/src/'
-                });
-                ctx = window.require.s.contexts[ctxName];
-                if (typeof cb === 'function' && cb_mocks) {
-                  for (k in cb_mocks) {
-                    v = cb_mocks[k];
-                    ctx.defined[k] = v;
-                    ctx.specified[k] = ctx.loaded[k] = true;
-                  }
-                }
-                if (typeof cb_mocks === 'function') {
-                  cb = cb_mocks;
-                }
-                module = void 0;
-                runs(function() {
-                  return specRequire([name], function(mod) {
-                    return module = mod;
-                  });
-                });
-                waitsFor((function() {
-                  return module !== void 0;
-                }), "'" + name + "' Module to load", 1000);
-                return runs(function() {
-                  return cb(module, specRequire);
-                });
+          var cur_ctx;
+          cur_ctx = void 0;
+          return Spec({
+            loadModule: function(cb_mocks, cb) {
+              var ctxName, mod_name, mod_obj, module, specRequire, _fn;
+              if (!(cb != null) && isFunc(cb_mocks)) {
+                cb = cb_mocks;
+                cb_mocks = void 0;
               }
-            };
-          })());
+              if (!isFunc(cb)) {
+                throw "Could not load spec for " + name;
+              }
+              if (cur_ctx) {
+                $("[data-requirecontext='" + cur_ctx.contextName + "']").remove();
+              }
+              specRequire = requirejs.config({
+                context: ctxName = "specs" + (ctxPostfix++),
+                baseUrl: '/src/'
+              });
+              cur_ctx = window.require.s.contexts[ctxName];
+              if (cb_mocks) {
+                _fn = function(mod_obj) {
+                  var mod_map;
+                  mod_map = cur_ctx.makeModuleMap(mod_name, null, true);
+                  return (cur_ctx.registry[mod_name] = new cur_ctx.Module(mod_map)).init([], function() {
+                    return mod_obj;
+                  }, void 0, {
+                    enabled: true
+                  });
+                };
+                for (mod_name in cb_mocks) {
+                  mod_obj = cb_mocks[mod_name];
+                  _fn(mod_obj);
+                }
+              }
+              module = void 0;
+              runs(function() {
+                return specRequire([name], function(m) {
+                  return module = m;
+                });
+              });
+              waitsFor((function() {
+                return module != null;
+              }), "'" + name + "' Module to load", 1000);
+              return runs(function() {
+                return cb(module, specRequire);
+              });
+            }
+          });
         });
       });
     });
